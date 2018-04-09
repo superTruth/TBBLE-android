@@ -618,7 +618,9 @@ public class TBBLEBase {
     private Runnable actionTimeoutRunnable = new Runnable() {
         @Override
         public void run() {
-
+            workAction.status = TBBLEBaseAction.TBBaseActionStatus.TBBLEACTION_FAIL;
+            workAction.cb.onFail(workAction, TBErrorCode.TBTIMEOUT);
+            handler.post(actionLoopRunnable);
         }
     };
 
